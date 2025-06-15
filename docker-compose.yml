@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  job-portal-app:
+    build: .
+    container_name: job-portal-app
+    ports:
+      - "5050:5050"
+    environment:
+      SERVER_PORT: ${SERVER_PORT}
+      SPRING_DATA_MONGODB_HOST: ${MONGO_HOST}
+      SPRING_DATA_MONGODB_PORT: ${MONGO_PORT}
+      SPRING_DATA_MONGODB_DATABASE: ${MONGO_DB}
+      SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
+      SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
+    depends_on:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo:7
+    container_name: jobportal-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:
