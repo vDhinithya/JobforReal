@@ -46,8 +46,11 @@
 - Maven
 - MongoDB running locally or on a server
 - Git
+- Docker (optional, if running with Docker)
 
-### Installation
+## Running the Application
+
+### **Option 1: Run Locally**
 
 1. Clone the repository:
 
@@ -58,17 +61,29 @@ cd JobforReal
 
 2. Install depedencies:
 
-``` 
+```bash 
 mvn clean install
 
 ```
 3. Configure MongoDB connection in ```application.properties``` or ```application.yml```:
-```
+```bash 
 spring.data.mongodb.uri=mongodb://localhost:27017/jobportal
 
 ```
 4. Run the application
-```
+```bash 
 mvn spring-boot:run
  ```
 The backend will be available at ``` http://localhost:5050 ```
+
+### **Option 2: Run using Docker**
+
+1. Build the Docker image
+From the project root (Where the ```Dockerfile``` is):
+ ```bash 
+ docker build -t jobforreal-backend
+  ```
+2. Run Docker Container
+ ```bash 
+ docker run -d -p 5050:5050 --name jobforreal-backend jobforreal-backend
+  ```
